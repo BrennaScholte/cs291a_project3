@@ -13,5 +13,8 @@ Rails.application.routes.draw do
   root "sessions#show"
 
   get "/login" , to: "sessions#index"
-  
+  post "/login" , to: "sessions#create"
+
+  # TODO: decide if we wnat to use this or define everything
+  # resources :sessions
 end

@@ -1,1 +1,9 @@
-<h1><%= @session.username %></h1>
+<ul>
+    <% @sessions.each do |session| %>
+        <li>
+            <%= session.username %>
+        </li>
+    <% end %>
+</ul>
+
+<h1>Test</h1>
