@@ -1,0 +1,10 @@
+<%= form_with model: session do |form| %>
+    <div>
+      <%= form.label :username %><br>
+      <%= form.text_field :username %>
+    </div>
+  
+    <div>
+      <%= form.submit %>
+    </div>
+<% end %>
