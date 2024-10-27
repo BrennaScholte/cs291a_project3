@@ -12,8 +12,9 @@ Rails.application.routes.draw do
   # Defines the root path route ("/")
   root "sessions#show"
 
-  get "/login" , to: "sessions#index"
-  post "/login" , to: "sessions#create"
+  get '/login', to: 'sessions#new'
+  post '/login', to: 'sessions#create'
+  get '/logout', to: 'sessions#destroy'  # Changed from DELETE to GET
 
   # TODO: decide if we wnat to use this or define everything
   # resources :sessions

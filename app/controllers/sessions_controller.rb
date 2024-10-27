@@ -4,8 +4,7 @@ class SessionsController < ApplicationController
   end
 
   def show
-    @sessions = Session.all
-    # @session = Session.new
+    @current_user = User.find_by(id: session[:user_id])
   end
 
   def new
@@ -13,14 +12,14 @@ class SessionsController < ApplicationController
   end
 
   def create
-    puts params.inspect
-    @session = Session.new(session_params)
+    user = User.find_or_create_by(username: session_params[:username])
+    session[:user_id] = user.id
+    redirect_to root_path
+  end
 
-    if @session.save
-      redirect_to @session # redirect to root, which displays posts
-    else
-      render :new, status: :unprocessable_entity # Return error
-    end
+  def destroy
+    session[:user_id] = nil
+    redirect_to root_path
   end
 
   private
