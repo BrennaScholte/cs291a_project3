@@ -1,6 +1,5 @@
 class SessionsController < ApplicationController
-  # before_action :set_current_user
-  before_action :require_login, except: [:new]
+  before_action :require_login, except: [:new, :create]
 
   def index
     # @session = Session.new
@@ -15,11 +14,11 @@ class SessionsController < ApplicationController
   end
 
   def new
-    
+    # renders login form
   end
 
   def create
-    user = User.find_or_create_by(username: session_params[:username])
+    user = User.find_or_create_by(username: params[:username])
     session[:user_id] = user.id
     redirect_to root_path
   end
@@ -30,15 +29,15 @@ class SessionsController < ApplicationController
   end
 
   def require_login
-    unless current_user != nil 
+    unless session[:user_id]
       redirect_to login_path 
     end
   end
 
-  private
-    def session_params
-      params.require(:session).permit(:username)
-    end
+  # private
+  #   def session_params
+  #     params.require(:session).permit(:username)
+  #   end
 
   
 end
