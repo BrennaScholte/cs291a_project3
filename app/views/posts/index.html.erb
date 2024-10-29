@@ -1,0 +1,11 @@
+<% if @current_user %>
+  <p>Logged in as: <%= @current_user.username %></p>
+<% end %>
+
+<ul>
+    <% @posts.each do |post| %>
+        <li>
+            <%= post.body %>
+        </li>
+    <% end %>
+</ul>
