@@ -1,30 +1,43 @@
 class SessionsController < ApplicationController
-  def index
-    @session = Session.new
-  end
+  before_action :require_login, except: [:new, :create]
 
-  def show
-    @sessions = Session.all
+  def index
     # @session = Session.new
   end
 
+  def show
+    @current_user = User.find_by(id: session[:user_id])
+  end
+
+  def current_user
+    @current_user
+  end
+
   def new
-    @session = Session.new
+    # renders login form
   end
 
   def create
-    puts params.inspect
-    @session = Session.new(session_params)
+    user = User.find_or_create_by(username: params[:username])
+    session[:user_id] = user.id
+    redirect_to root_path
+  end
 
-    if @session.save
-      redirect_to @session # redirect to root, which displays posts
-    else
-      render :new, status: :unprocessable_entity # Return error
+  def destroy
+    session[:user_id] = nil
+    redirect_to login_path
+  end
+
+  def require_login
+    unless session[:user_id]
+      redirect_to login_path 
     end
   end
 
-  private
-    def session_params
-      params.require(:session).permit(:username)
-    end
+  # private
+  #   def session_params
+  #     params.require(:session).permit(:username)
+  #   end
+
+  
 end

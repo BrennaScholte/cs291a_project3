@@ -1,9 +1,5 @@
-<ul>
-    <% @sessions.each do |session| %>
-        <li>
-            <%= session.username %>
-        </li>
-    <% end %>
-</ul>
-
-<h1>Test</h1>
+<% if @current_user %>
+  <p>Logged in as: <%= @current_user.username %></p>
+<% else %>
+  <p>Not logged in</p>
+<% end %>
