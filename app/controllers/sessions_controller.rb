@@ -25,11 +25,11 @@ class SessionsController < ApplicationController
 
   def destroy
     session[:user_id] = nil
-    redirect_to root_path
+    redirect_to login_path
   end
 
   def require_login
-    unless session[:user_id]
+    unless session[:user_id] != nil
       redirect_to login_path 
     end
   end

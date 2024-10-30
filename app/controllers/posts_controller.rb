@@ -4,8 +4,14 @@ class PostsController < ApplicationController
     @current_user = User.find_by(id: session[:user_id])
   end
 
+  def new
+    @post = Post.new
+  end
+
   def create
     @current_user = User.find_by(id: session[:user_id])
+    # TODO: figure out which to use
+    @post = Post.new
     @post = @user.posts.create(post_params) 
     # TODO: redirect to ?
   end
