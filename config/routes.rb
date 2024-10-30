@@ -17,8 +17,10 @@ Rails.application.routes.draw do
   post '/login', to: 'sessions#create'
   get '/logout', to: 'sessions#destroy'  # Changed from DELETE to GET
 
+  post '/', to: 'posts#create', as: 'new_post'
+
   # TODO: do we need this for posts?
-  # resources :sessions do
+  # resources :users do
   #   resources :posts
   # end
 end
