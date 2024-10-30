@@ -1,11 +1,16 @@
 <% if @current_user %>
-  <p>Logged in as: <%= @current_user.username %></p>
+  <p>Currently logged in as: <%= @current_user.username %></p>
 <% end %>
 
 <ul>
     <% @posts.each do |post| %>
         <li>
-            <%= post.body %>
+            <p> Posted by: <%= post.username %> </p>
+            <p> Last updated: <%= post.updated_at %> </p> 
+            <p> Post Body: <%= post.body %> </p>
+
+            <p> *list comments here* </p>
+            <p> *form to add new comment* </p>
         </li>
     <% end %>
 </ul>
