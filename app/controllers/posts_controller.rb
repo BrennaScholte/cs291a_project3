@@ -23,7 +23,9 @@ class PostsController < ApplicationController
       redirect_to root_path # TODO: redirect or stay on same page?
       puts "Post created successfully"
     else
-      render :new, status: :unprocessable_entity # Return error
+      # render :new, status: :unprocessable_entity # Return error
+      flash[:alert] = @post.errors.full_messages.join(", ")
+      redirect_to root_path
     end
   end
 

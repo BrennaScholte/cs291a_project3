@@ -18,7 +18,8 @@ Rails.application.routes.draw do
   get '/logout', to: 'sessions#destroy'  # Changed from DELETE to GET
 
   post '/', to: 'posts#create', as: 'new_post'
-
+  get '/posts', to: 'posts#index'
+  post '/posts', to: 'posts#create'
   # TODO: do we need this for posts?
   # resources :users do
   #   resources :posts

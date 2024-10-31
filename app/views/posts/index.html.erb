@@ -1,6 +1,22 @@
 <% if @current_user %>
   <p>Currently logged in as: <%= @current_user.username %></p>
+
+  <h2>Add a new post:</h2>
+  <%= form_with(model: Post.new) do |form| %>
+    <div>
+      <%= form.text_area :body %>
+    </div>
+    <%= form.submit "Create Post" %>
+  <% end %>
 <% end %>
+
+<br>
+<% if flash[:alert] %>
+    <div style="background-color: #f8d7da; color: #721c24; padding: 10px; border: 1px solid #f5c6cb; border-radius: 4px; margin-bottom: 10px;">
+        <strong>Alert:</strong> <%= flash[:alert] %>
+    </div>
+<% end %>
+<br>
 
 <ul>
     <% @posts.each do |post| %>
@@ -14,6 +30,3 @@
         </li>
     <% end %>
 </ul>
-
-<h2> Add a new post:</h2>
-<%= render 'posts/form', user: @current_user %>
