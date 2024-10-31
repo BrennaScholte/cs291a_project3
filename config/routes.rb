@@ -20,8 +20,9 @@ Rails.application.routes.draw do
   post '/', to: 'posts#create', as: 'new_post'
   get '/posts', to: 'posts#index'
   post '/posts', to: 'posts#create'
-  get '/posts/:id', to: 'posts#show'
+  get '/posts/:id', to: 'posts#show', as: 'post'
 
+  delete '/posts/:id', to: 'posts#destroy'
 
   # TODO: do we need this for posts?
   # resources :users do
