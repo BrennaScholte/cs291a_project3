@@ -22,6 +22,7 @@ Rails.application.routes.draw do
   post '/posts', to: 'posts#create'
   get '/posts/:id', to: 'posts#show'
 
+  post '/comments', to: 'comments#create'
 
   # TODO: do we need this for posts?
   # resources :users do

@@ -8,13 +8,20 @@ class CommentsController < ApplicationController
   end
 
   def create
-    @current_post = Post.find_by(id: params[:id])
+    puts "before find"
+    puts params[:post_id]
+    @post = Post.find(params[:id])
+    puts "after find"
 
-    @comment = @current_post.comments.build(post_params)
+    @comment = @post.comments.build(comment_params)
     @comment.user_id = session[:user_id]
 
     if @comment.save
       redirect_to post_path(@current_post)
+    else
+      puts "comment failed"
+    end
+  end
 
   private
   def comment_params
