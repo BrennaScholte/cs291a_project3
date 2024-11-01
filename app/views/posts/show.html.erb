@@ -2,10 +2,18 @@
 
 <p> Created by: <%= @post.username %></p>
 <p> Last updated: <%= @post.updated_at.strftime("%B %d, %Y, %I:%M %p") %> </p> 
-<%= @post.body %>
 
-<p> *list comments here* </p>
-<p> *form to add new comment* </p>
+<h2><%= @post.body %></h2>
+
+<ul>
+    <% @comments.each do |comment| %>
+        <li>
+            <%= comment.body %>
+        </li>
+    <% end %>
+</ul>
+
+<%= render 'comments/form' %>
 
 <% if @current_user.username == @post.username %>
     <%= link_to "Delete Post", post_path(@post), data: {
