@@ -1,16 +1,14 @@
 <% if @current_user %>
   <p>Currently logged in as: <%= @current_user.username %></p>
-<% end %>
 
 <h2>Add a new post:</h2>
 <%= render 'posts/form' %>
-
 
 <ul>
     <% @posts.each do |post| %>
         <li>
             <p> Posted by: <%= post.username %> </p>
-            <p> Last updated: <%= post.updated_at %> </p> 
+            <p> <%= post.updated_at.strftime("%B %d, %Y, %I:%M %p") %> </p> 
             <p> Post Body: <%= post.body %> </p>
 
             <p> *list comments here* </p>
@@ -18,3 +16,5 @@
         </li>
     <% end %>
 </ul>
+
+<% end %>
