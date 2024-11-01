@@ -16,6 +16,7 @@ class CommentsController < ApplicationController
       redirect_to post_path(@current_post)
     else
       flash[:error] = "Error creating comment"
+      flash[:alert] = @comment.errors.full_messages.join(", ")
       redirect_to post_path(@current_post)
     end
   end

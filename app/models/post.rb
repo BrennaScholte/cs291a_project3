@@ -5,11 +5,10 @@ class Post < ApplicationRecord
     # Validations
     validate :body_blacklist
 
-    # TODO: add more blacklisted words
-    BLACKLIST = ["Trump", "Donald Trump", "MAGA", "Kamala", "Kamala Harris", "election"]
+    BLACKLIST = ["Trump", "Donald Trump", "MAGA", "Kamala", "Kamala Harris", "election", "Witch hunt", "Make America Great Again", "The radical left"]
     private
     def body_blacklist
-        if BLACKLIST.any? { |word| body&.include?(word) }
+        if BLACKLIST.any? { body.downcase.include?(word.downcase) }
             errors.add(:body, "Post may potentially influence the election. Not allowed")
         end
     end

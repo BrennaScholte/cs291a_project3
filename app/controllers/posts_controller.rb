@@ -10,14 +10,14 @@ class PostsController < ApplicationController
     @current_user = User.find_by(id: session[:user_id])
     begin
       @post = Post.find(params[:id])
+      @comments = @post.comments
 
     # Returns 404 if post not found
     rescue ActiveRecord::RecordNotFound
       @post = nil
       render file: "#{Rails.root}/public/404.html", status: :not_found unless @post
+      return
     end
-
-    @comments = @post.comments
   end
 
   def new
