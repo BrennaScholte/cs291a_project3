@@ -4,17 +4,21 @@ class CommentsController < ApplicationController
   end
 
   def new
-    @comment = Comment.new
+    @post = Post.find(params[:post_id])
+    @comment = @post.comments.build
   end
 
   def create
-    @current_post = Post.find_by(id: params[:id])
-
-    @comment = @current_post.comments.build(post_params)
-    @comment.user_id = session[:user_id]
+    @current_post = Post.find_by(id: params[:post_id])
+    @comment = @current_post.comments.build(comment_params)
 
     if @comment.save
       redirect_to post_path(@current_post)
+    else
+      flash[:error] = "Error creating comment"
+      redirect_to post_path(@current_post)
+    end
+  end
 
   private
   def comment_params

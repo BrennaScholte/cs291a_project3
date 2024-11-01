@@ -7,6 +7,7 @@ class PostsController < ApplicationController
   end
 
   def show
+    @current_user = User.find_by(id: session[:user_id])
     begin
       @post = Post.find(params[:id])
 
@@ -15,6 +16,8 @@ class PostsController < ApplicationController
       @post = nil
       render file: "#{Rails.root}/public/404.html", status: :not_found unless @post
     end
+
+    @comments = @post.comments
   end
 
   def new
@@ -40,13 +43,21 @@ class PostsController < ApplicationController
     end
   end
 
-  def require_login
-    unless session[:user_id] != nil
-      redirect_to login_path 
-    end
+  def destroy
+    @post = Post.find(params[:id])
+    @post.destroy
+
+    redirect_to root_path, status: :see_other
   end
+  
 
   private
+    def require_login
+      unless session[:user_id] != nil
+        redirect_to login_path 
+      end
+    end
+
     def post_params
       params.require(:post).permit(:body, :username, :num_comments, :user_id)
     end
