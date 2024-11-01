@@ -24,6 +24,8 @@ Rails.application.routes.draw do
 
   delete '/posts/:id', to: 'posts#destroy'
 
+  post '/posts/:post_id/comments', to: 'comments#create', as: 'post_comments'
+
   # TODO: do we need this for posts?
   # resources :users do
   #   resources :posts

@@ -16,6 +16,8 @@ class PostsController < ApplicationController
       @post = nil
       render file: "#{Rails.root}/public/404.html", status: :not_found unless @post
     end
+
+    @comments = @post.comments
   end
 
   def new
