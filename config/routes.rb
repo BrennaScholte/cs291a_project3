@@ -23,6 +23,7 @@ Rails.application.routes.draw do
   get '/posts/:id', to: 'posts#show', as: 'post'
 
   delete '/posts/:id', to: 'posts#destroy'
+  post '/posts/:id', to: 'posts#update'
 
   # TODO: do we need this for posts?
   # resources :users do

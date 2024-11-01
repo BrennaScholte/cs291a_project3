@@ -14,6 +14,7 @@
             <p> *list comments here* </p>
             <p> *form to add new comment* </p>
             <% if @current_user.username == post.username %>
+              <%= link_to "Update Post", post_path(post) %>
               <%= link_to "Delete Post", post_path(post), data: {
                 turbo_method: :delete,
                 turbo_confirm: "Are you sure?"
