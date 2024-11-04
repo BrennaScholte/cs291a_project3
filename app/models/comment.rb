@@ -1,5 +1,6 @@
 class Comment < ApplicationRecord
     belongs_to :post
+    validates :body, presence: true, length: { minimum: 8, message: "must be at least 8 characters long" }
 
     # Validations
     validate :body_blacklist
